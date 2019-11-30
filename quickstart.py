@@ -50,7 +50,7 @@ if not events:
 # pp(events[0])
 
 
-def get_calendarList():
+def get_calendar_list():
     return service.calendarList().list().execute()
 
 
@@ -63,6 +63,14 @@ def create_calendar(title, description):
     return service.calendars().insert(body=body).execute()
 
 
+def get_events(calendarId):
+    return service.events().list(calendarId=calendarId, orderBy='startTime').execute()
+
+
+def get_event(calendarId, eventId):
+    return service.events().get(calendarId=calendarId, eventId=eventId).execute()
+
+
 def create_event(calendar, title, description, start, end):
     body = {
         'summary': title,
@@ -73,7 +81,4 @@ def create_event(calendar, title, description, start, end):
     return service.events().insert(calendar, body).execute()
 
 
-create_calendar('WunderCal', 'Im testing this API')
-
-
-pp(get_calendarList().get('items'))
+pp(get_calendar_list().get('items'))
