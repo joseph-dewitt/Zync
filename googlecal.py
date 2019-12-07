@@ -47,11 +47,7 @@ if not events:
 # for event in events:
 #     start = event['start'].get('dateTime', event['start'].get('date'))
 #     print(start, event['summary'])
-# pp(events[0])
-
-
-def get_calendar_list():
-    return service.calendarList().list().execute()
+pp(events[0])
 
 
 def create_calendar(title, description):
@@ -63,12 +59,16 @@ def create_calendar(title, description):
     return service.calendars().insert(body=body).execute()
 
 
-def get_events(calendarId):
-    return service.events().list(calendarId=calendarId, orderBy='startTime').execute()
+def get_calendar_list():
+    return service.calendarList().list().execute()
 
 
-def get_event(calendarId, eventId):
-    return service.events().get(calendarId=calendarId, eventId=eventId).execute()
+def get_calendar(calendarId):
+    return service.calendar().get(calendarId).execute()
+
+
+def update_calendar(calendarId, body):
+    return service.calendar().patch(calendarId, body).execute()
 
 
 def create_event(calendar, title, description, start, end):
@@ -81,4 +81,13 @@ def create_event(calendar, title, description, start, end):
     return service.events().insert(calendar, body).execute()
 
 
-pp(get_calendar_list().get('items'))
+def get_events(calendarId):
+    return service.events().list(calendarId=calendarId, orderBy='startTime').execute()
+
+
+def get_event(calendarId, eventId):
+    return service.events().get(calendarId=calendarId, eventId=eventId).execute()
+
+
+def update_event(calendarId, eventId, body):
+    return service.events().patch(calendarId=calendarId, eventId=eventId, body=body)
