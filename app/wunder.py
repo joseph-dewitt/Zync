@@ -76,6 +76,3 @@ def get_task_reminder(task_id):
 def get_list_reminders(list_id):
     params = {'list_id': list_id}
     return s.get(f"{url_root}reminders", params=params).json()
-
-
-print(get_list_reminders(405738483))

@@ -5,7 +5,7 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-from pprint import pprint as pp
+
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -18,8 +18,12 @@ creds = None
 # The file token.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first
 # time.
-if os.path.exists('token.pickle'):
-    with open('token.pickle', 'rb') as token:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+pickle_path = os.path.join(BASE_DIR, 'token.pickle')
+credentials_path = os.path.join(BASE_DIR, 'credentials.json')
+
+if os.path.exists(pickle_path):
+    with open(pickle_path, 'rb') as token:
         creds = pickle.load(token)
 # If there are no (valid) credentials available, let the user log in.
 if not creds or not creds.valid:
@@ -27,10 +31,10 @@ if not creds or not creds.valid:
         creds.refresh(Request())
     else:
         flow = InstalledAppFlow.from_client_secrets_file(
-            'credentials.json', SCOPES)
+            credentials_path, SCOPES)
         creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
-    with open('token.pickle', 'wb') as token:
+    with open(pickle_path, 'wb') as token:
         pickle.dump(creds, token)
 
 service = build('calendar', 'v3', credentials=creds)
@@ -47,7 +51,6 @@ if not events:
 # for event in events:
 #     start = event['start'].get('dateTime', event['start'].get('date'))
 #     print(start, event['summary'])
-pp(events[0])
 
 
 def create_calendar(title, description):
@@ -81,8 +84,8 @@ def create_event(calendar, title, description, start, end):
     return service.events().insert(calendar, body).execute()
 
 
-def get_events(calendarId):
-    return service.events().list(calendarId=calendarId, orderBy='startTime').execute()
+def get_events(calendarId='primary'):
+    return service.events().list(calendarId=calendarId).execute().get('items')
 
 
 def get_event(calendarId, eventId):

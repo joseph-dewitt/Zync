@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }} - Zync</title>
-</head>
-<body>
-    <h1>Zync</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block app_content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if todos %}
+                {% include '_todos.html' %}
+            {% endif %}
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col">
+            {% if events %}
+                {% include '_events.html' %}
+            {% endif %}
+        </div>
+    </div>
+</div>

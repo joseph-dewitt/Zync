@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {{ title }} - Zync
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}

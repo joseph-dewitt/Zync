@@ -1,4 +1,4 @@
-/token.pickle
+app/token.pickle
 /venv/
 /.idea/
-/credentials.json
+app/credentials.json
