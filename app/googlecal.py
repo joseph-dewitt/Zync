@@ -63,7 +63,7 @@ def create_calendar(title, description):
 
 
 def get_calendar_list():
-    return service.calendarList().list().execute()
+    return service.calendarList().list().execute().get('items')
 
 
 def get_calendar(calendarId):
@@ -85,7 +85,11 @@ def create_event(calendar, title, description, start, end):
 
 
 def get_events(calendarId='primary'):
-    return service.events().list(calendarId=calendarId).execute().get('items')
+    return service.events().list(calendarId=calendarId,
+                                 maxResults=5,
+                                 timeMin=now,
+                                 singleEvents=True,
+                                 orderBy='startTime').execute().get('items')
 
 
 def get_event(calendarId, eventId):
