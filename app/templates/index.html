@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block app_content %}
-    <div class="row">
-        <div class="col">
+    <div class="row row-height">
+        <div class="col list">
             {% if boards %}
                 {% include '_todos.html' %}
             {% endif %}
         </div>
         <div class="col-2">
-
+            <button>Sync It!</button>
         </div>
-        <div class="col">
+        <div class="col list">
             {% if events %}
                 {% include '_events.html' %}
             {% endif %}

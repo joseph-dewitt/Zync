@@ -1,5 +1,12 @@
 {% for board in boards %}
-    <div class="row">
+    <button class="btn btn-block" type="button" data-toggle="collapse" data-target=".collapse{{ board.id }}">
         <h5>{{ board.name }}</h5>
-    </div>
+    </button>
+    {% for list in get_lists(board.id).json() %}
+        <div class="collapse collapse{{ board.id }} w-100">
+            <div class="card">
+                <h5>{{ list.name }}</h5>
+            </div>
+        </div>
+    {% endfor %}
 {% endfor %}

@@ -1,0 +1,12 @@
+html{
+    height: 100%;
+}
+
+.row-height{
+    height: 85vh;
+}
+
+.list{
+    height: 100%;
+    overflow-y: scroll;
+}

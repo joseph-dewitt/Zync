@@ -66,8 +66,8 @@ def get_calendar_list():
     return service.calendarList().list().execute().get('items')
 
 
-def get_calendar(calendarId):
-    return service.calendar().get(calendarId).execute()
+def get_calendar(calendarId='primary'):
+    return service.calendars().get(calendarId=calendarId).execute()
 
 
 def update_calendar(calendarId, body):
@@ -85,11 +85,9 @@ def create_event(calendar, title, description, start, end):
 
 
 def get_events(calendarId='primary'):
+    # TODO: SORT THE RESULTS, GCAL DOESN'T SORT WHEN YOU EXCLUDE REPEATS
     return service.events().list(calendarId=calendarId,
-                                 maxResults=5,
-                                 timeMin=now,
-                                 singleEvents=True,
-                                 orderBy='startTime').execute().get('items')
+                                 timeMin=now).execute().get('items')
 
 
 def get_event(calendarId, eventId):
