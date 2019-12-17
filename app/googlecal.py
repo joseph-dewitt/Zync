@@ -86,7 +86,10 @@ def create_event(calendar, title, description, start, end):
 
 def get_events(calendarId='primary'):
     # TODO: SORT THE RESULTS, GCAL DOESN'T SORT WHEN YOU EXCLUDE REPEATS
+    # TODO: ALL POSSIBLE FILTERS NEED TO BE ARGUMENTS
     return service.events().list(calendarId=calendarId,
+                                 singleEvents=True,
+                                 orderBy='startTime',
                                  timeMin=now).execute().get('items')
 
 
