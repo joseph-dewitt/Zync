@@ -8,7 +8,9 @@ from app import trello
 @app.route('/index')
 def index():
     events = googlecal.get_events()
-    boards = trello.get_boards().json()
+    boards = trello.get_boards()
+    print(boards)
+    print(events)
     return render_template('index.html',
                            title='Home',
                            events=events,

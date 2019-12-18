@@ -18,4 +18,10 @@ def normalize_list(map):
 
 
 def transform(map, element):
-    return {map[key]: value for key, value in element.items()}
+    result = {}
+    for key, value in element.items():
+        if key in map:
+            result[map[key]] = value
+        else:
+            result[key] = value
+    return result
