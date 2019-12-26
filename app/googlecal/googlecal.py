@@ -1,11 +1,10 @@
 import datetime
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-from .googlecaltransforms import *
 import os.path
 import pickle
 
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -84,13 +83,14 @@ def create_event(calendar, title, description, start, end):
     return service.events().insert(calendar, body).execute()
 
 
-def get_events(calendarId='primary'):
+def get_events(calendarId='primary', start=None, end=None):
     # TODO: SORT THE RESULTS, GCAL DOESN'T SORT WHEN YOU EXCLUDE REPEATS
     # TODO: ALL POSSIBLE FILTERS NEED TO BE ARGUMENTS
     return service.events().list(calendarId=calendarId,
                                  singleEvents=True,
                                  orderBy='startTime',
-                                 timeMin=now).execute().get('items')
+                                 timeMin=start,
+                                 timeMax=end).execute().get('items')
 
 
 def get_event(calendarId, eventId):
@@ -99,3 +99,25 @@ def get_event(calendarId, eventId):
 
 def update_event(calendarId, eventId, body):
     return service.events().patch(calendarId=calendarId, eventId=eventId, body=body)
+
+
+# import pytz
+# from datetime import timedelta
+# from datetime import datetime
+# from datetime import date
+# today = date.today()
+# offset = (today.weekday() - 6) % 7
+# last_sunday = today - timedelta(days=offset)
+# end = last_sunday + timedelta(days=7)
+# last_sunday = datetime.combine(last_sunday, datetime.min.time())
+# end = datetime.combine(end, datetime.min.time())
+# last_sunday = last_sunday.replace(tzinfo=pytz.UTC)
+# end = end.replace(tzinfo=pytz.UTC)
+# things = service.events().list(calendarId='primary',
+#                       singleEvents=True,
+#                       timeMin=last_sunday.isoformat(),
+#                       timeMax=end.isoformat()).execute()
+# print(last_sunday.isoformat())
+# print(end.isoformat())
+# import pprint as pp
+# pp.pprint(things)

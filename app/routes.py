@@ -2,15 +2,15 @@ from flask import render_template
 from app import app
 from app import googlecal
 from app import trello
+import pprint as pp
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    events = googlecal.get_events()
+    events = googlecal.get_week_events()
     boards = trello.get_boards()
-    print(boards)
-    print(events)
+    pp.pprint(events)
     return render_template('index.html',
                            title='Home',
                            events=events,

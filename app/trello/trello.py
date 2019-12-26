@@ -1,4 +1,4 @@
-from app.normalize import normalize, normalize_list
+from app.helpers import normalize, normalize_list
 import os
 import requests
 from .trellotransforms import *
