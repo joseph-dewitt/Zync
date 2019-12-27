@@ -11,3 +11,15 @@ def get_week_events():
     return get_events(calendarId='primary',
                       start=last_sunday,
                       end=next_sunday)
+
+
+def get_weeks():
+    """
+       TODO in normal form, pass the start and end dates of four weeks
+       first one being the week that includes today
+    """
+    return 0
+
+
+def get_calendar():
+    return 0

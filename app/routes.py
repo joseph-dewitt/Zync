@@ -10,7 +10,6 @@ import pprint as pp
 def index():
     events = googlecal.get_week_events()
     boards = trello.get_boards()
-    pp.pprint(events)
     return render_template('index.html',
                            title='Home',
                            events=events,

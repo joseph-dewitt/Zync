@@ -31,6 +31,13 @@ def transformer(transform, element):
     return result
 
 
+def month_span(month_name):
+    """
+    TODO take the name of the month, return the start and end date
+    :return:
+    """
+
+
 def week_span():
     today = dt.date.today()
     offset = (today.weekday() - 6) % 7
