@@ -1,1 +1,1 @@
-from .googlecalservice import *
+from .googlecalservice import GoogleCalService

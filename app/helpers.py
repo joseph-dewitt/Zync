@@ -1,3 +1,4 @@
+from collections import namedtuple
 import datetime as dt
 from pytz import timezone
 
@@ -31,19 +32,15 @@ def transformer(transform, element):
     return result
 
 
-def month_span(month_name):
-    """
-    TODO take the name of the month, return the start and end date
-    :return:
-    """
+Span = namedtuple('Span', 'start end')
 
 
-def week_span():
-    today = dt.date.today()
-    offset = (today.weekday() - 6) % 7
-    last_sunday = today - dt.timedelta(days=offset)
-    next_sunday = last_sunday + dt.timedelta(days=7)
-    return last_sunday, next_sunday
+def week_span(day=dt.date.today()):
+    offset = (day.weekday() - 6) % 7
+    prev_sunday = day - dt.timedelta(days=offset)
+    next_saturday = prev_sunday + dt.timedelta(days=6)
+    week = Span(start=prev_sunday, end=next_saturday)
+    return week
 
 
 def date_to_rfc3339(date, tz):

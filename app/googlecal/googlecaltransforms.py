@@ -1,8 +1,10 @@
 map_calendar_to_group = {
-    'summary': 'name'
+    'summary': 'name',
+    'timeZone': 'timezone'
 }
 
-# TODO to implement this, I need a string representation of a date span, or maybe just the starting date
+# TODO needs a start and end date, timezone
+# However, these don't need to be mapped, since it's a homegrown object
 map_week_to_unit = {
 
 }

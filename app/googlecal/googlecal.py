@@ -61,7 +61,7 @@ def create_calendar(title, description):
     return service.calendars().insert(body=body).execute()
 
 
-def get_calendar_list():
+def get_calendars():
     return service.calendarList().list().execute().get('items')
 
 
