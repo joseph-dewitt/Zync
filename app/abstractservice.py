@@ -3,16 +3,10 @@ from abc import ABC, abstractmethod
 
 class AbstractService(ABC):
 
+    # This method is meant to only call directly from the API
+    # module, and instantiate group objects
     @abstractmethod
     def get_groups(self):
-        pass
-
-    @abstractmethod
-    def get_units(self, group):
-        pass
-
-    @abstractmethod
-    def get_elements(self, unit):
         pass
 
 
@@ -20,6 +14,9 @@ class AbstractObject(ABC):
 
     def __init__(self, body):
         self.data = body
+
+    def __repr__(self):
+        return f"{self.__class__.__name__} with id {self['id']} and name {self['name']}"
 
     def __setitem__(self, key, value):
         self.data[key] = value

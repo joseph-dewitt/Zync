@@ -1,1 +1,1 @@
-from .trelloservice import *
+from .trelloservice import TrelloService

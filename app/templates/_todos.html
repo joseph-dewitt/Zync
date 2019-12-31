@@ -1,15 +1,15 @@
-{% for board in boards %}
-    <button class="btn btn-block" type="button" data-toggle="collapse" data-target=".collapse{{ board.id }}">
-        <h5>{{ board.name }}</h5>
+{% for group in groups %}
+    <button class="btn btn-block" type="button" data-toggle="collapse" data-target=".collapse{{ group['id']|replace("@", "")|replace(".", "") }}">
+        <h5>{{ group['name'] }}</h5>
     </button>
-    {% for list in get_lists(board.id) %}
-        <div class="collapse collapse{{ board.id }} w-100">
-            <button class="btn btn-block" type="button" data-toggle="collapse" data-target=".collapse{{ list.id }}">
-                <h5>{{ list.name }}</h5>
+    {% for unit in group.units %}
+        <div class="collapse collapse{{ group['id']|replace("@", "")|replace(".", "") }} w-100">
+            <button class="btn btn-block" type="button" data-toggle="collapse" data-target=".collapse{{ unit['id']|replace("@", "")|replace(".", "") }}">
+                <h5>{{ unit['name'] }}</h5>
             </button>
-            {% for card in get_cards(list.id) %}
-                <div class="collapse collapse{{ list.id }}">
-                    <h5>{{ card.name }}</h5>
+            {% for element in unit.elements %}
+                <div class="collapse collapse{{ unit['id']|replace("@", "")|replace(".", "") }}">
+                    <h5>{{ element['name'] }}</h5>
                 </div>
             {% endfor %}
         </div>
