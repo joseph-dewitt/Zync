@@ -1,6 +1,6 @@
 from app.helpers import week_span, date_to_rfc3339
 import datetime as dt
-from .googlecal import get_calendar, get_calendars, get_events
+from .googlecal import get_calendar, get_calendars, get_events, create_event
 from app.abstractservice import AbstractService, Group, Unit, Element
 
 
@@ -9,6 +9,10 @@ class GoogleCalService(AbstractService):
     @staticmethod
     def get_groups():
         return [Calendar(body) for body in get_calendars()]
+
+    @staticmethod
+    def set_event(event):
+        return create_event(event)
 
 
 # TODO create a calendar helper module

@@ -3,13 +3,15 @@ map_calendar_to_group = {
     'timeZone': 'timezone'
 }
 
-# TODO needs a start and end date, timezone
-# However, these don't need to be mapped, since it's a homegrown object
-map_week_to_unit = {
-
+map_group_to_calendar = {
+    'name': 'summary',
+    'timezone': 'timeZone'
 }
-
 
 map_event_to_element = {
     'summary': 'name'
+}
+
+map_element_to_event = {
+    'name': 'summary'
 }

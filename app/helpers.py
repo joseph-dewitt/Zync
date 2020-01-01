@@ -23,6 +23,24 @@ def normalize_list(transform):
     return decorator_normalize
 
 
+def denormalize(transform):
+    def decorator_normalize(func):
+        def wrapper_normalize(element):
+            result = transformer(transform, element)
+            return func(result)
+        return wrapper_normalize
+    return decorator_normalize
+
+
+def denormalize_list(transform):
+    def decorator_normalize(func):
+        def wrapper_normalize(elements):
+            result = [transformer(transform, element) for element in elements]
+            return func(result)
+        return wrapper_normalize
+    return decorator_normalize
+
+
 def transformer(transform, element):
     result = {}
     for key, value in element.items():

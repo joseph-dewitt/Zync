@@ -2,7 +2,7 @@ import datetime
 import os.path
 import pickle
 from app.googlecal.googlecaltransforms import *
-from app.helpers import normalize, normalize_list
+from app.helpers import denormalize, normalize, normalize_list
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
@@ -78,14 +78,9 @@ def update_calendar(calendarId, body):
     return service.calendar().patch(calendarId, body).execute()
 
 
-def create_event(calendar, title, description, start, end):
-    body = {
-        'summary': title,
-        'description': description,
-        'start': start,
-        'end': end
-    }
-    return service.events().insert(calendar, body).execute()
+@denormalize(map_element_to_event)
+def create_event(event):
+    return service.events().insert(calendarId='primary', body=event)
 
 
 @normalize_list(map_event_to_element)
