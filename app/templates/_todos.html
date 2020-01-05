@@ -8,9 +8,12 @@
                 <h5>{{ unit['name'] }}</h5>
             </button>
             {% for element in unit.elements %}
-                <div class="collapse collapse{{ unit['id']|replace("@", "")|replace(".", "") }}">
-                    <h5>{{ element['name'] }}</h5>
-                </div>
+                <label class="collapse collapse{{ unit['id']|replace("@", "")|replace(".", "") }}">
+                    <input type="radio" name="sync" class="card-input-element d-none" value=" {{ element['id'] }} ">
+                    <div class="card">
+                        <h5>{{ element['name'] }}</h5>
+                    </div>
+                </label>
             {% endfor %}
         </div>
     {% endfor %}

@@ -10,3 +10,11 @@ html{
     height: 100%;
     overflow-y: scroll;
 }
+
+.card-input-element+.card:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked+.card {
+    border: 2px solid blue;
+}

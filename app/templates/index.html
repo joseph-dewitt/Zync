@@ -10,7 +10,7 @@
             {% endif %}
         </div>
         <div class="col-2">
-            <button>Sync It!</button>
+            <button class="btn" data-toggle="modal" data-target="#sync-modal">Sync It!</button>
         </div>
         <div class="col list">
             {% if calendars %}
@@ -20,4 +20,9 @@
             {% endif %}
         </div>
     </div>
+    {% if form %}
+        {% with form=form %}
+            {% include '_sync_modal.html' %}
+        {% endwith %}
+    {% endif %}
 {% endblock %}
