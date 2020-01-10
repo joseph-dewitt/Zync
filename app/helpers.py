@@ -7,8 +7,8 @@ import pprint as pp
 def normalize(transform):
     def decorator_normalize(func):
         def wrapper_normalize(*args, **kwargs):
-            result = func(*args, **kwargs)
-            return transformer(transform, result)
+            element = func(*args, **kwargs)
+            return transformer(transform, element)
         return wrapper_normalize
     return decorator_normalize
 
@@ -16,9 +16,8 @@ def normalize(transform):
 def normalize_list(transform):
     def decorator_normalize(func):
         def wrapper_normalize(*args, **kwargs):
-            result = func(*args, **kwargs)
-            normal_list = [transformer(transform, element) for element in result]
-            return normal_list
+            results = func(*args, **kwargs)
+            return [transformer(transform, element) for element in results]
         return wrapper_normalize
     return decorator_normalize
 
@@ -40,14 +39,17 @@ def denormalize_list(transform):
         return wrapper_normalize
     return decorator_normalize
 
-
+# TODO this function must be modified to resemble the transformer in the scratch file
 def transformer(transform, element):
     result = {}
-    for key, value in element.items():
-        if key in transform:
-            result[transform[key]] = value
+    for key, value in transform.items():
+        if isinstance(value, list):
+            field = element
+            for key in value:
+                field = field[key]
+            result[key] = field
         else:
-            result[key] = value
+            result[key] = field[value]
     return result
 
 
