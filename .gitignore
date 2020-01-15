@@ -3,3 +3,4 @@
 /app/googlecal/credentials.json
 /app/googlecal/token.pickle
 .vscode/settings.json
+/.env

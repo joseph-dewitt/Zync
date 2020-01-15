@@ -1,4 +1,4 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 import datetime as dt
 from pytz import timezone
 import pprint as pp
@@ -25,7 +25,7 @@ def normalize_list(transform):
 def denormalize(transform):
     def decorator_normalize(func):
         def wrapper_normalize(element):
-            result = transformer(transform, element)
+            result = reverse_transformer(transform, element)
             return func(result)
         return wrapper_normalize
     return decorator_normalize
@@ -34,22 +34,39 @@ def denormalize(transform):
 def denormalize_list(transform):
     def decorator_normalize(func):
         def wrapper_normalize(elements):
-            result = [transformer(transform, element) for element in elements]
+            result = [reverse_transformer(transform, element) for element in elements]
             return func(result)
         return wrapper_normalize
     return decorator_normalize
 
-# TODO this function must be modified to resemble the transformer in the scratch file
+
 def transformer(transform, element):
     result = {}
     for key, value in transform.items():
         if isinstance(value, list):
             field = element
-            for key in value:
-                field = field[key]
+            for name in value:
+                field = field.get(name)
             result[key] = field
         else:
-            result[key] = field[value]
+            result[key] = element.get(value)
+    return result
+
+
+def ddict():
+    return defaultdict(ddict)
+
+
+def reverse_transformer(transform, element):
+    result = ddict()
+    for key, value in transform.items():
+        if isinstance(value, list):
+            field = result
+            for name in value[:-1]:
+                field = field[name]
+            field[value[-1]] = element[key]
+        else:
+            result[value] = element[key]
     return result
 
 
