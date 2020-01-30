@@ -1,4 +1,4 @@
 
 
-def sync_to_googlecal(card):
+def sync(service_from, service_to, element):
     return
