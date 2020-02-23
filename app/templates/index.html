@@ -5,17 +5,19 @@
         <div class="col list">
             {% if boards %}
                 {% with groups=boards %}
-                    {% include '_todos.html' %}
+                    {% include '_elements.html' %}
                 {% endwith %}
             {% endif %}
         </div>
         <div class="col-2">
-            <button class="btn" data-toggle="modal" data-target="#sync-modal">Sync It!</button>
+            <!-- <button class="btn" data-toggle="modal" data-target="#sync-modal">Sync It!</button> -->
+            <!-- This button will have a function passed to it's onClick, which starts off the sync process -->
+            <button id="sync-it" class="btn">Sync It!</button>
         </div>
         <div class="col list">
             {% if calendars %}
                 {% with groups=calendars %}
-                    {% include '_todos.html' %}
+                    {% include '_elements.html' %}
                 {% endwith %}
             {% endif %}
         </div>

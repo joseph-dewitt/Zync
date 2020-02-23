@@ -60,7 +60,7 @@ class Week(Unit):
         events = [Event(body) for body in
                   get_events(calendarId=self['calendarId'],
                              start=date_to_rfc3339(self['start'], self['timezone']),
-                             end=date_to_rfc3339(self['end'], self['timezone']))]
+                             end=date_to_rfc3339(self['end'] + dt.timedelta(days=1), self['timezone']))]
         return events
 
 

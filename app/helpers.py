@@ -5,6 +5,20 @@ import pprint as pp
 
 
 def normalize(transform):
+    """The decorator to be applied to service API calls which return single objects.
+
+    Normalize takes a transform for whichever service it is used in, and returns a
+    decorator, decorator_normalize. This decorator takes the function, the service
+    method, and applies the transformer method to the dict which the service method returns.
+
+    The purpose of this decorator is to provide a simple means of taking the data
+    returned by the service and changing the keys into the common keys. By doing this
+    with every service, all data can be represented in the same way.
+
+    Argument:
+    transform -- the map used by transformer connecting the normal key-name to the
+    service key-name, or path to service key-name in the case of nested JSON.
+    """
     def decorator_normalize(func):
         def wrapper_normalize(*args, **kwargs):
             element = func(*args, **kwargs)
@@ -14,6 +28,15 @@ def normalize(transform):
 
 
 def normalize_list(transform):
+    """The decorator to be applied to service API calls which return multiple objects.
+
+    This decorator is identical to normalize, save for expecting a list of objects
+    rather than just one. It applies to transform using transformer on each one.
+
+    Argument:
+    transform -- the map used by transformer connecting the normal key-name to the
+    service key-name, or path to service key-name in the case of nested JSON.
+    """
     def decorator_normalize(func):
         def wrapper_normalize(*args, **kwargs):
             results = func(*args, **kwargs)

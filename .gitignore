@@ -3,3 +3,4 @@
 /app/googlecal/credentials.json
 /app/googlecal/token.pickle
 /.env
+*__pycache__*

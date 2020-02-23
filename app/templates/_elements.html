@@ -9,7 +9,7 @@
             </button>
             {% for element in unit.elements %}
                 <label class="collapse collapse{{ unit['id']|replace("@", "")|replace(".", "") }}">
-                    <input type="radio" name="sync" class="card-input-element d-none" value=" {{ element['id'] }} ">
+                    <input type="radio" name="sync" class="card-input-element d-none" value=" {{ element['id]'] }} ">
                     <div class="card">
                         <h5>{{ element['name'] }}</h5>
                     </div>
