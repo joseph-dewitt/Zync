@@ -26,9 +26,10 @@ def get_units(calendar):
         day = day + dt.timedelta(days=7)
     return units
 
-
-# TODO put this function somewhere else, and move the
-# TODO week instantiation in the units property in Calendar
+"""
+TODO put this function somewhere else, and move the
+TODO week instantiation in the units property in Calendar
+"""
 def get_unit(calendar, start):
     span = week_span(start)
     name = f'{span.start.strftime("%B %d, %Y")} - {span.end.strftime("%B %d, %Y")}'
@@ -46,6 +47,10 @@ class Calendar(Group):
 
     @property
     def units(self):
+        """
+        It shouldn't be hard to abstract this out
+        Make the framework do it when necessary
+        """
         return [Week(body) for body in get_units(self)]
 
 

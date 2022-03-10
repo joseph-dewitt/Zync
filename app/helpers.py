@@ -3,6 +3,9 @@ import datetime as dt
 from pytz import timezone
 import pprint as pp
 
+"""
+TODO normalize/denormalize is based on read/write API calls.
+"""
 
 def normalize(transform):
     """The decorator to be applied to service API calls which return single objects.
